@@ -2,6 +2,9 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
+import org.kainos.ea.client.EmployeeDoesNotExistException;
+import org.kainos.ea.client.FailedToGetEmployeeException;
+import org.kainos.ea.cli.EmployeeRequest;
 import org.kainos.ea.client.DeliveryEmployeeCouldNotBeCreatedException;
 import org.kainos.ea.client.EmployeeRequestIsNotValid;
 import org.kainos.ea.client.FailedToGetEmployeeException;
@@ -24,14 +27,14 @@ public class EmployeeService {
         try {
             deliveryEmployeeList = employeeDao.getAllDeliveryEmployees();
 
-            return deliveryEmployeeList;
+
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
 
             throw new FailedToGetEmployeeException();
         }
-
+         return deliveryEmployeeList;
     }
 
     public List<Employee> getAllEmployee() throws FailedToGetEmployeeException {
@@ -58,4 +61,24 @@ public class EmployeeService {
             return employeeDao.createNewEmployee(employeeRequest);
 
     }
-}
+
+
+    public EmployeeRequest getDeliveryEmployeeByID(int id) throws FailedToGetEmployeeException, EmployeeDoesNotExistException {
+        try {
+            EmployeeRequest employee = employeeDao.getDeliveryEmployeeByID(id);
+
+            if (employee == null) {
+                throw new EmployeeDoesNotExistException();
+            }
+            return employee;
+        } catch (SQLException e) {
+
+            System.err.println(e.getMessage());
+            throw new FailedToGetEmployeeException();
+
+
+        }
+    }
+
+
+    }

@@ -3,6 +3,7 @@ package org.kainos.ea.db;
 import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
 import org.kainos.ea.client.DeliveryEmployeeCouldNotBeCreatedException;
+import org.kainos.ea.cli.EmployeeRequest;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -38,8 +39,50 @@ public class EmployeeDao {
         return employeeList;
     }
 
+    /*Query the database using given ID to view name, salary, bank account number and national insurance number of
+    * a delivery employee.*/
+    public EmployeeRequest getDeliveryEmployeeByID(int id) throws SQLException {
+
+
+        Connection c = databaseConnector.getConnection();
+
+        //Statement st = c.createStatement();
+
+        //ResultSet rs = st.executeQuery("SELECT f_name, l_name, salary, bank_acc_num, ni_num FROM employee INNER JOIN delivery_employee ON employee.employee_id= delivery_employee.employee_id WHERE delivery_employee.employee_id="+id);
+        String selectStatement= "SELECT f_name, l_name, salary, bank_acc_num, ni_num FROM employee INNER JOIN delivery_employee ON employee.employee_id= delivery_employee.employee_id WHERE delivery_employee.employee_id=?";
+
+        PreparedStatement st=c.prepareStatement(selectStatement);
+
+        st.setInt(1, id);
+
+        ResultSet rs = st.executeQuery();
+
+
+        //While there are very valid results add them to an EmployeeRequest object. Otherwise return null.
+        while (rs.next()) {
+            EmployeeRequest employeeRequest= new EmployeeRequest(
+
+                    rs.getString("f_name"),
+                    rs.getString("l_name"),
+                    rs.getDouble("salary"),
+                    rs.getString("bank_acc_num"),
+                    rs.getString("ni_num")
+
+
+
+            );
+            System.out.println(employeeRequest.getfName());
+            return employeeRequest;
+        }
+
+        return null;
+    }
+
+
+
+
     public int createNewEmployee(EmployeeRequest employeeRequest) throws SQLException, DeliveryEmployeeCouldNotBeCreatedException {
-        
+
             Connection c = databaseConnector.getConnection();
 
             String insertStatement = "INSERT INTO employee (f_name, l_name, salary, bank_acc_num, ni_num) " +

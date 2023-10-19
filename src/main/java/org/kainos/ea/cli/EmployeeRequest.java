@@ -13,20 +13,6 @@ public class EmployeeRequest {
     private String bankAccNum;
     private String niNum;
 
-    @JsonCreator
-    public EmployeeRequest(
-            @JsonProperty("fName") String fName,
-            @JsonProperty("lName") String lName,
-            @JsonProperty("salary") double salary,
-            @JsonProperty("bank_acc")String bankAccNum,
-            @JsonProperty("ni_num") String niNum) {
-        this.fName = fName;
-        this.lName = lName;
-        this.salary = salary;
-        this.bankAccNum = bankAccNum;
-        this.niNum = niNum;
-    }
-
     public String getfName() {
         return fName;
     }
@@ -65,5 +51,23 @@ public class EmployeeRequest {
 
     public void setNiNum(String niNum) {
         this.niNum = niNum;
+    }
+
+
+
+    @JsonCreator
+    public EmployeeRequest (
+            @JsonProperty("fName") String fName,
+            @JsonProperty("lName") String lName,
+            @JsonProperty("salary") Double salary,
+            @JsonProperty("bankAccNum") String bankAccNum,
+            @JsonProperty("niNum") String niNum
+    )
+    {
+        this.fName=fName;
+        this.lName=lName;
+        this.salary=salary;
+        this.bankAccNum=bankAccNum;
+        this.niNum=niNum;
     }
 }

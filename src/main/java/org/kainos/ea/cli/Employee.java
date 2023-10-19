@@ -26,12 +26,12 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public String getfName() {
+    public String getF_name() {
         return fName;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
+    public void setF_name(String f_name) {
+        this.fName = f_name;
     }
 
     public String getlName() {
