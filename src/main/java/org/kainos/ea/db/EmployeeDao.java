@@ -43,7 +43,7 @@ public class EmployeeDao {
 
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT * FROM employee" +
+        ResultSet rs = st.executeQuery("SELECT f_name, l_name, salary, bank_acc_num, ni_num FROM employee" +
                 "INNER JOIN delivery_employee" +
                 "ON employee.employee_id = delivery_employee.employee_id;");
 

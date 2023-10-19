@@ -25,7 +25,7 @@ public class EmployeeService {
             throw new FailedToGetEmployeeException();
         }
 
-}
+    }
 
     public List<Employee> getAllEmployee() throws FailedToGetEmployeeException {
 
@@ -39,4 +39,6 @@ public class EmployeeService {
 
         return employeeList;
     }
-    }
+
+
+}
