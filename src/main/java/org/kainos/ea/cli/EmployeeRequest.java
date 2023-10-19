@@ -1,5 +1,7 @@
 package org.kainos.ea.cli;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class EmployeeRequest {
     private String f_name;
     private String l_name;
@@ -7,7 +9,12 @@ public class EmployeeRequest {
     private String bank_acc_num;
     private String ni_num;
 
-    public EmployeeRequest(String f_name, String l_name, double salary, String bank_acc_num, String ni_num) {
+    public EmployeeRequest(
+            @JsonProperty("f_name") String f_name,
+            @JsonProperty("l_name") String l_name,
+            @JsonProperty("salary") double salary,
+            @JsonProperty("bank_acc_num") String bank_acc_num,
+            @JsonProperty("ni_num") String ni_num) {
         this.f_name = f_name;
         this.l_name = l_name;
         this.salary = salary;
