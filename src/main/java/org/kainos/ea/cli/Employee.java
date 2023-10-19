@@ -2,28 +2,28 @@ package org.kainos.ea.cli;
 
 public class Employee {
 
-    private int employee_id;
+    private int employeeId;
     private String fName;
     private String lName;
     private double salary;
-    private String bank_acc_num;
-    private String ni_num;
+    private String bankAccNum;
+    private String niNum;
 
-    public Employee(int employee_id, String fname, String lname, double salary, String bank_acc_num, String ni_num) {
-        this.employee_id = employee_id;
-        this.fName = fname;
-        this.lName = lname;
+    public Employee(int employeeId, String fName, String lName, double salary, String bankAccNum, String niNum) {
+        this.employeeId = employeeId;
+        this.fName = fName;
+        this.lName = lName;
         this.salary = salary;
-        this.bank_acc_num = bank_acc_num;
-        this.ni_num = ni_num;
+        this.bankAccNum = bankAccNum;
+        this.niNum = niNum;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getfName() {
@@ -50,19 +50,19 @@ public class Employee {
         this.salary = salary;
     }
 
-    public String getBank_acc_num() {
-        return bank_acc_num;
+    public String getBankAccNum() {
+        return bankAccNum;
     }
 
-    public void setBank_acc_num(String bank_acc_num) {
-        this.bank_acc_num = bank_acc_num;
+    public void setBankAccNum(String bankAccNum) {
+        this.bankAccNum = bankAccNum;
     }
 
-    public String getNi_num() {
-        return ni_num;
+    public String getNiNum() {
+        return niNum;
     }
 
-    public void setNi_num(String ni_num) {
-        this.ni_num = ni_num;
+    public void setNiNum(String niNum) {
+        this.niNum = niNum;
     }
 }

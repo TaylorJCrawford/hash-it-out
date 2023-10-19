@@ -1,25 +1,30 @@
 package org.kainos.ea.cli;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.sql.Date;
+
 public class EmployeeRequest {
+
     private String fName;
     private String lName;
     private double salary;
-    private String bank_acc_num;
-    private String ni_num;
+    private String bankAccNum;
+    private String niNum;
 
+    @JsonCreator
     public EmployeeRequest(
-            @JsonProperty("f_name") String fname,
-            @JsonProperty("l_name") String lname,
+            @JsonProperty("fName") String fName,
+            @JsonProperty("lName") String lName,
             @JsonProperty("salary") double salary,
-            @JsonProperty("bank_acc_num") String bank_acc_num,
-            @JsonProperty("ni_num") String ni_num) {
-        this.fName = fname;
-        this.lName = lname;
+            @JsonProperty("bank_acc")String bankAccNum,
+            @JsonProperty("ni_num") String niNum) {
+        this.fName = fName;
+        this.lName = lName;
         this.salary = salary;
-        this.bank_acc_num = bank_acc_num;
-        this.ni_num = ni_num;
+        this.bankAccNum = bankAccNum;
+        this.niNum = niNum;
     }
 
     public String getfName() {
@@ -46,19 +51,19 @@ public class EmployeeRequest {
         this.salary = salary;
     }
 
-    public String getBank_acc_num() {
-        return bank_acc_num;
+    public String getBankAccNum() {
+        return bankAccNum;
     }
 
-    public void setBank_acc_num(String bank_acc_num) {
-        this.bank_acc_num = bank_acc_num;
+    public void setBankAccNum(String bankAccNum) {
+        this.bankAccNum = bankAccNum;
     }
 
-    public String getNi_num() {
-        return ni_num;
+    public String getNiNum() {
+        return niNum;
     }
 
-    public void setNi_num(String ni_num) {
-        this.ni_num = ni_num;
+    public void setNiNum(String niNum) {
+        this.niNum = niNum;
     }
 }

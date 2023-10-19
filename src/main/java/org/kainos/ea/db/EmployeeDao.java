@@ -51,8 +51,8 @@ public class EmployeeDao {
             st.setString(1, employeeRequest.getfName());
             st.setString(2, employeeRequest.getlName());
             st.setDouble(3, employeeRequest.getSalary());
-            st.setString(4, employeeRequest.getBank_acc_num());
-            st.setString(5, employeeRequest.getNi_num());
+            st.setString(4, employeeRequest.getBankAccNum());
+            st.setString(5, employeeRequest.getNiNum());
 
             st.executeUpdate();
 
@@ -97,6 +97,33 @@ public class EmployeeDao {
             System.err.println(e.getMessage());
             throw new SQLException();
         }
+    }
+
+    public List<EmployeeRequest> getAllDeliveryEmployees() throws SQLException {
+
+        Connection c = databaseConnector.getConnection();
+
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT f_name, l_name, salary, bank_acc_num, ni_num FROM employee " +
+                "INNER JOIN delivery_employee " +
+                "ON employee.employee_id = delivery_employee.employee_id;");
+
+        List<EmployeeRequest> deliveryEmployeeList = new ArrayList<>();
+
+        while (rs.next()) {
+            EmployeeRequest employee = new EmployeeRequest(
+                    rs.getString("f_name"),
+                    rs.getString("l_name"),
+                    rs.getDouble("salary"),
+                    rs.getString("bank_acc_num"),
+                    rs.getString("ni_num")
+            );
+
+            deliveryEmployeeList.add(employee);
+        }
+
+        return deliveryEmployeeList;
     }
 
 }

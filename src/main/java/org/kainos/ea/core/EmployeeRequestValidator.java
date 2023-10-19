@@ -7,6 +7,11 @@ public class EmployeeRequestValidator {
 
     public String isEmployeeValid (EmployeeRequest employeeRequest) {
 
+        System.out.println(employeeRequest.getfName());
+        System.out.println(employeeRequest.getlName());
+        System.out.println(employeeRequest.getNiNum());
+        System.out.println(employeeRequest.getSalary());
+
         if (employeeRequest.getfName().length() > 50) {
             return "Name is greater than 50 Chars.";
         }
@@ -15,7 +20,7 @@ public class EmployeeRequestValidator {
             return "Name is greater than 50 Chars.";
         }
 
-        if (employeeRequest.getNi_num().length() == 9) {
+        if (employeeRequest.getNiNum().length() == 9) {
             return "National isn num is not equal";
         }
 
