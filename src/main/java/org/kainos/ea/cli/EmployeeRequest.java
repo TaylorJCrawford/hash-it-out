@@ -1,8 +1,9 @@
 package org.kainos.ea.cli;
 
-public class Employee {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    private int employeeId;
+public class EmployeeRequest {
 
     private String fName;
     private String lName;
@@ -10,8 +11,8 @@ public class Employee {
     private String bankAccNum;
     private String niNum;
 
-    public Employee(int employeeId, String fName, String lName, double salary, String bankAccNum, String niNum) {
-        this.employeeId = employeeId;
+    public EmployeeRequest( String fName, String lName, double salary, String bankAccNum, String niNum) {
+
         this.fName = fName;
         this.lName = lName;
         this.salary = salary;
@@ -19,13 +20,7 @@ public class Employee {
         this.niNum = niNum;
     }
 
-    public int getEmployee_id() {
-        return employeeId;
-    }
 
-    public void setEmployee_id(int employee_id) {
-        this.employeeId = employee_id;
-    }
 
     public String getfName() {
         return fName;
@@ -65,5 +60,21 @@ public class Employee {
 
     public void setNiNum(String niNum) {
         this.niNum = niNum;
+    }
+
+    @JsonCreator
+    public EmployeeRequest (
+            @JsonProperty("f_name") String fName,
+            @JsonProperty("l_name") String lName,
+            @JsonProperty("salary") Double salary,
+            @JsonProperty("bank_acc_num") String bankAccNum,
+            @JsonProperty("ni_num") String niNum
+    )
+    {
+        this.fName=fName;
+        this.lName=lName;
+        this.salary=salary;
+        this.bankAccNum=bankAccNum;
+        this.niNum=niNum;
     }
 }
