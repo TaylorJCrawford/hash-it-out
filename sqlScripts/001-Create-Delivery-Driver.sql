@@ -6,7 +6,7 @@ BEGIN
 
 
 INSERT INTO DeliveryEmployee (EmployeeID, EmployeeFirstName, EmployeeSurname, Salary, BankAccountNumber, NationalInsurance)
-VALUES ('', 'Jonny', 'Evans', '100000', '01234', 'AB12345', 'NI12345');
+VALUES (Jonny', 'Evans', '100000', '01234', 'AB12345', 'NI12345');
 
 
 

@@ -15,6 +15,7 @@ public class EmployeeDao {
 
         Connection c = databaseConnector.getConnection();
 
+
         Statement st = c.createStatement();
 
         ResultSet rs = st.executeQuery("SELECT * FROM employee;");
@@ -41,13 +42,20 @@ public class EmployeeDao {
     public Employee getEmployeeByID(int id) throws SQLException{
         Connection c = databaseConnector.getConnection();
 
-        Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT employee_id, f_name, l_name, salary, bank_acc_num, ni_num" +
-                " FROM employee WHERE employee_id="+id);
+        String insertStatement = ("SELECT employee_id, f_name, l_name, salary, bank_acc_num, ni_num" +
+                " FROM employee WHERE employee_id=?");
 
-        while (rs.next()){
-            return new Employee(
+        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+
+                    st.setInt(1, id);
+
+        st.executeQuery();
+
+        ResultSet rs = st.getGeneratedKeys();
+
+        if (rs.next()){
+            Employee employee = new Employee(
                     rs.getInt("employee_id"),
                     rs.getString("f_name"),
                     rs.getString("l_name"),
@@ -55,33 +63,34 @@ public class EmployeeDao {
                     rs.getString("bank_acc_num"),
                     rs.getString("ni_num")
             );
+            return employee;
         }
         return null;
     }
 
     // Getting array of employeeIDs so validator can loop through and check if employee is valid
- public int[] viewAllEmployees() throws SQLException {
-        Connection c = databaseConnector.getConnection();
-
-        Statement st = c.createStatement();
-
-        ResultSet rs = st.executeQuery("SELECT employee_id FROM employee");
-
-        List<Integer> employeeIds = new ArrayList<>();
-
-        while (rs.next()) {
-            int employeeId = rs.getInt("employee_id");
-            employeeIds.add(employeeId);
-        }
-
-        // Convert the List to an int[] array
-        int[] employeeIdsArray = new int[employeeIds.size()];
-        for (int i = 0; i < employeeIds.size(); i++) {
-            employeeIdsArray[i] = employeeIds.get(i);
-        }
-
-        return employeeIdsArray;
-    }
+// public  viewAllEmployees() throws SQLException {
+//        Connection c = databaseConnector.getConnection();
+//
+//        Statement st = c.createStatement();
+//
+//        ResultSet rs = st.executeQuery("SELECT employee_id FROM employee");
+//
+//        List<Integer> employeeIds = new ArrayList<>();
+//
+//        while (rs.next()) {
+//            int employeeId = rs.getInt("employee_id");
+//            employeeIds.add(employeeId);
+//        }
+//
+//        // Convert the List to an int[] array
+//        int[] employeeIdsArray = new int[employeeIds.size()];
+//        for (int i = 0; i < employeeIds.size(); i++) {
+//            employeeIdsArray[i] = employeeIds.get(i);
+//        }
+//
+//        return employeeIdsArray;
+//    }
 
 
 
@@ -90,7 +99,7 @@ public class EmployeeDao {
 
    Connection c = databaseConnector.getConnection();
 
-   String updateStatement = "UPDATE employee SET f_name = ?, l_name = ?, salary = ?, bank_acc_num =? WHERE employee_id = ?";
+   String updateStatement = "UPDATE employee SET f_name = ?, l_name = ?, salary = ?, bank_acc_num =? RIGHT JOIN delivery_employee on employee.employee_id = delivery_employee.employee_id WHERE employee_id = ? ";
 
         PreparedStatement st = c.prepareStatement(updateStatement);
 
