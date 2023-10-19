@@ -2,6 +2,9 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
+import org.kainos.ea.client.DeliveryEmployeeDoesNotExistException;
+import org.kainos.ea.client.EmployeeDoesNotExistException;
+import org.kainos.ea.client.FailedToDeleteEmployeeException;
 import org.kainos.ea.client.FailedToGetEmployeeException;
 import org.kainos.ea.db.EmployeeDao;
 
@@ -38,6 +41,21 @@ public class EmployeeService {
         }
 
         return employeeList;
+    }
+
+    public void deleteDeliveryEmployee(int id) throws DeliveryEmployeeDoesNotExistException, FailedToDeleteEmployeeException {
+        try {
+            Employee employeeToDelete = employeeDao.getDeliveryEmployeeById(id);
+
+            if(employeeToDelete == null) {
+                throw new DeliveryEmployeeDoesNotExistException();
+            }
+
+            employeeDao.deleteDeliveryEmployee(id);
+        } catch (SQLException e) {
+            throw new FailedToDeleteEmployeeException();
+        }
+
     }
 
 

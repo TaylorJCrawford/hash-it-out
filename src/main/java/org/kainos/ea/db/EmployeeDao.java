@@ -43,9 +43,7 @@ public class EmployeeDao {
 
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT f_name, l_name, salary, bank_acc_num, ni_num FROM employee" +
-                "INNER JOIN delivery_employee" +
-                "ON employee.employee_id = delivery_employee.employee_id;");
+        ResultSet rs = st.executeQuery("SELECT f_name, l_name, salary, bank_acc_num, ni_num FROM employee INNER JOIN delivery_employee ON employee.employee_id = delivery_employee.employee_id;");
 
         List<EmployeeRequest> deliveryEmployeeList = new ArrayList<>();
 
@@ -63,6 +61,19 @@ public class EmployeeDao {
 
         return deliveryEmployeeList;
     }
+
+    public void deleteDeliveryEmployee(int id) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        String updateStatement = "DELETE FROM delivery_employee WHERE employee_id = ?";
+
+        PreparedStatement st = c.prepareStatement(updateStatement);
+
+        st.setInt(1, id);
+
+        st.executeUpdate();
+    }
+
 
 
 
