@@ -3,6 +3,7 @@ package org.kainos.ea.resources;
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.EmployeeService;
 import org.kainos.ea.cli.Employee;
+import org.kainos.ea.client.FailedToGetEmployeeException;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -24,7 +25,19 @@ public class EmployeeController {
     public Response getAllEmployees () {
         try {
             return Response.ok().entity(employeeService.getAllEmployee()).build();
-        } catch (SQLException e) {
+        } catch (FailedToGetEmployeeException e) {
+            System.err.println(e.getMessage());
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/employee/delivery")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllEmployeesDeliveryEmployees () {
+        try {
+            return Response.ok().entity(employeeService.getAllDeliveryEmployees()).build();
+        } catch (FailedToGetEmployeeException e) {
             System.err.println(e.getMessage());
             return Response.serverError().build();
         }
