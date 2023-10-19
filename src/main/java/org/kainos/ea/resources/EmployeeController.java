@@ -1,5 +1,6 @@
 package org.kainos.ea.resources;
 
+import io.swagger.annotations.Api;
 import org.kainos.ea.api.EmployeeService;
 import org.kainos.ea.cli.Employee;
 
@@ -11,6 +12,7 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.List;
 
+@Api("Engineering Academy Hash It Out Employee")
 @Path("/api")
 public class EmployeeController {
 
