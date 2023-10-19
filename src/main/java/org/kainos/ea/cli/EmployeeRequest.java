@@ -15,8 +15,8 @@ public class EmployeeRequest {
 
     @JsonCreator
     public EmployeeRequest(
-            @JsonProperty("f_name") String fName,
-            @JsonProperty("l_name") String lName,
+            @JsonProperty("fName") String fName,
+            @JsonProperty("lName") String lName,
             @JsonProperty("salary") double salary,
             @JsonProperty("bank_acc")String bankAccNum,
             @JsonProperty("ni_num") String niNum) {
