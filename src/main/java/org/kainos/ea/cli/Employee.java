@@ -2,15 +2,15 @@ package org.kainos.ea.cli;
 
 public class Employee {
 
-    private int id;
+    private int employee_id;
     private String f_name;
     private String l_name;
     private double salary;
     private String bank_acc_num;
     private String ni_num;
 
-    public Employee(int id, String f_name, String l_name, double salary, String bank_acc_num, String ni_num) {
-        this.id = id;
+    public Employee(int employee_id, String f_name, String l_name, double salary, String bank_acc_num, String ni_num) {
+        this.employee_id = employee_id;
         this.f_name = f_name;
         this.l_name = l_name;
         this.salary = salary;
@@ -18,12 +18,12 @@ public class Employee {
         this.ni_num = ni_num;
     }
 
-    public int getId() {
-        return id;
+    public int getEmployee_id() {
+        return employee_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmployee_id(int employee_id) {
+        this.employee_id = employee_id;
     }
 
     public String getF_name() {

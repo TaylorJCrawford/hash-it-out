@@ -25,7 +25,7 @@ public class EmployeeDao {
 
         while (rs.next()) {
             Employee employee = new Employee(
-                    rs.getInt("id"),
+                    rs.getInt("employee_id"),
                     rs.getString("f_name"),
                     rs.getString("l_name"),
                     rs.getDouble("salary"),

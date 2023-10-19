@@ -23,12 +23,11 @@ public class EmployeeController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllEmployees () {
         try {
-            List<Employee> employeeList = employeeService.getAllEmployee();
-            Response.ok(employeeList).build();
+            return Response.ok().entity(employeeService.getAllEmployee()).build();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println(e.getMessage());
+            return Response.serverError().build();
         }
-        return null;
     }
 }
 
