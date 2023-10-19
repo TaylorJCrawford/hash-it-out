@@ -3,6 +3,7 @@ package org.kainos.ea;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.kainos.ea.resources.EmployeeController;
 
 public class DropwizardwebserviceApplication extends Application<DropwizardwebserviceConfiguration> {
 
@@ -24,6 +25,6 @@ public class DropwizardwebserviceApplication extends Application<Dropwizardwebse
     public void run(final DropwizardwebserviceConfiguration configuration,
                     final Environment environment) {
         // TODO: implement application
+        environment.jersey().register(new EmployeeController());
     }
-
 }
