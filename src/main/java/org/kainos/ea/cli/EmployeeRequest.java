@@ -1,29 +1,30 @@
 package org.kainos.ea.cli;
 
-public class Employee {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    private int employeeId;
+import java.sql.Date;
+
+public class EmployeeRequest {
+
     private String fName;
     private String lName;
     private double salary;
     private String bankAccNum;
     private String niNum;
 
-    public Employee(int employeeId, String fName, String lName, double salary, String bankAccNum, String niNum) {
-        this.employeeId = employeeId;
+    @JsonCreator
+    public EmployeeRequest(
+            @JsonProperty("f_name") String fName,
+            @JsonProperty("l_name") String lName,
+            @JsonProperty("salary") double salary,
+            @JsonProperty("bank_acc")String bankAccNum,
+            @JsonProperty("ni_num") String niNum) {
         this.fName = fName;
         this.lName = lName;
         this.salary = salary;
         this.bankAccNum = bankAccNum;
         this.niNum = niNum;
-    }
-
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
     }
 
     public String getfName() {
