@@ -54,10 +54,10 @@ public class EmployeeController {
 
         try {
             return Response.ok().entity(employeeService.createNewEmployee(employeeRequest)).build();
-        } catch (DeliveryEmployeeCouldNotBeCreatedException | EmployeeRequestIsNotValid e) {
+        } catch (EmployeeRequestIsNotValid e) {
             System.err.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).build();
-        } catch (SQLException e) {
+        } catch (DeliveryEmployeeCouldNotBeCreatedException | SQLException e) {
             System.err.println(e.getMessage());
             return Response.serverError().build();
         }

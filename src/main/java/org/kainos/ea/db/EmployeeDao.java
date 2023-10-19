@@ -39,8 +39,7 @@ public class EmployeeDao {
     }
 
     public int createNewEmployee(EmployeeRequest employeeRequest) throws SQLException, DeliveryEmployeeCouldNotBeCreatedException {
-
-        try {
+        
             Connection c = databaseConnector.getConnection();
 
             String insertStatement = "INSERT INTO employee (f_name, l_name, salary, bank_acc_num, ni_num) " +
@@ -93,10 +92,6 @@ public class EmployeeDao {
 
             // Error - Could not add employee to table.
             throw new DeliveryEmployeeCouldNotBeCreatedException();
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-            throw new SQLException();
-        }
     }
 
     public List<EmployeeRequest> getAllDeliveryEmployees() throws SQLException {
