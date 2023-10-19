@@ -11,7 +11,7 @@ CREATE TABLE employee (
 
 CREATE TABLE delivery_employee (
     employee_id int PRIMARY KEY,
-    FOREIGN_KEY(employee_id) REFERENCES employee(employee_id);
+    FOREIGN KEY(employee_id) REFERENCES employee(employee_id)
 );
 
 

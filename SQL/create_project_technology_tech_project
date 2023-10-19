@@ -16,8 +16,8 @@ CREATE TABLE technology (
 CREATE TABLE tech_project (
     technology_id int,
     project_id int
-    FOREIGN_KEY(technology_id) REFERENCES technology(technology_id),
-    FOREIGN_KEY(project_id) REFERENCES project(project_id),
-    PRIMAY_KEY(technology_id, project_id)
+    FOREIGN KEY(technology_id) REFERENCES technology(technology_id),
+    FOREIGN KEY(project_id) REFERENCES project(project_id),
+    PRIMARY  KEY(technology_id, project_id)
 );
 
