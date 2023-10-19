@@ -10,8 +10,8 @@ CREATE TABLE employee (
 );
 
 CREATE TABLE delivery_employee (
-    delivery_employee_id int PRIMARY KEY AUTO_INCREMENT,
     employee_id int
+    FOREIGN_KEY(employee_id) REFERENCES employee(employee_id);
 );
 
 
