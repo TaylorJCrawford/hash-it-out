@@ -1,5 +1,6 @@
 package org.kainos.ea.core;
 
+import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
 import org.kainos.ea.db.EmployeeDao;
 
@@ -8,21 +9,19 @@ import java.sql.SQLException;
 public class EmployeeValidator {
 
 
-    // call ViewAllEmployees to get Array and loop through it
-    public boolean isValidEmployee(int idToCheck) throws SQLException {
+    public String isValidEmployee(EmployeeRequest idToCheck) throws SQLException {
 
-        EmployeeDao employeeDao = new EmployeeDao();
+        try {
+            EmployeeDao employeeDao = new EmployeeDao();
 
-        int[] employeelist = employeeDao.viewAllEmployees();
+            Employee employee = employeeDao.getEmployeeByID(idToCheck);
 
-        for (int id : employeelist) {
+            return employee != null;
 
-            if (id == idToCheck) {
-
-                return true;
-            }
-
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
-        return false;
+        return isValidEmployee(idToCheck);
     }
+
 }

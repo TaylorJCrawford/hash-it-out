@@ -46,7 +46,7 @@ public class EmployeeDao {
         String insertStatement = ("SELECT employee_id, f_name, l_name, salary, bank_acc_num, ni_num" +
                 " FROM employee WHERE employee_id=?");
 
-        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement st = c.prepareStatement(insertStatement);
 
                     st.setInt(1, id);
 
@@ -67,32 +67,6 @@ public class EmployeeDao {
         }
         return null;
     }
-
-    // Getting array of employeeIDs so validator can loop through and check if employee is valid
-// public  viewAllEmployees() throws SQLException {
-//        Connection c = databaseConnector.getConnection();
-//
-//        Statement st = c.createStatement();
-//
-//        ResultSet rs = st.executeQuery("SELECT employee_id FROM employee");
-//
-//        List<Integer> employeeIds = new ArrayList<>();
-//
-//        while (rs.next()) {
-//            int employeeId = rs.getInt("employee_id");
-//            employeeIds.add(employeeId);
-//        }
-//
-//        // Convert the List to an int[] array
-//        int[] employeeIdsArray = new int[employeeIds.size()];
-//        for (int i = 0; i < employeeIds.size(); i++) {
-//            employeeIdsArray[i] = employeeIds.get(i);
-//        }
-//
-//        return employeeIdsArray;
-//    }
-
-
 
 
     public void updateEmployee(int id, EmployeeRequest employee) throws SQLException{

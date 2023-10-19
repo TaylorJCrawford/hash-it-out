@@ -24,6 +24,11 @@ public class EmployeeService {
 public void updateEmployee(int id, EmployeeRequest employee) throws InvalidEmployeeException, EmployeeDoesNotExistException, FailedToUpdateEmployeeException {
 
         try{
+            String validation = employeeValidator.isValidEmployee(employee);
+
+            if (validation!=null){
+                throw new InvalidEmployeeException(validation);
+            }
 
             Employee employeeToUpdate = employeeDao.getEmployeeByID(id);
 
