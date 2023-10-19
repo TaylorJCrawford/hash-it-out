@@ -48,18 +48,14 @@ public class EmployeeService {
     }
 
 
-    public int createNewEmployee(EmployeeRequest employeeRequest) throws EmployeeRequestIsNotValid, SQLException {
+    public int createNewEmployee(EmployeeRequest employeeRequest) throws EmployeeRequestIsNotValid, SQLException, DeliveryEmployeeCouldNotBeCreatedException {
 
-        try {
-            String isEmployeeRequestValid = employeeRequestValidator.isEmployeeValid(employeeRequest);
-            System.out.println("--------------------- TAYLOR HERE");
-            if (isEmployeeRequestValid != null) {
-                System.out.println("--------------------- TAYLOR22 HERE");
+
+         String isEmployeeRequestValid = employeeRequestValidator.isEmployeeValid(employeeRequest);
+         if (isEmployeeRequestValid != null) {
                 throw new EmployeeRequestIsNotValid(isEmployeeRequestValid);
             }
             return employeeDao.createNewEmployee(employeeRequest);
-        } catch (DeliveryEmployeeCouldNotBeCreatedException e) {
-            throw new EmployeeRequestIsNotValid(e.getMessage());
-        }
+
     }
 }

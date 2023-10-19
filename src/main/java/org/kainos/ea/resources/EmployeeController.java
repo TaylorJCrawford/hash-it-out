@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import org.kainos.ea.api.EmployeeService;
 import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
+import org.kainos.ea.client.DeliveryEmployeeCouldNotBeCreatedException;
 import org.kainos.ea.client.EmployeeRequestIsNotValid;
 import org.kainos.ea.client.FailedToGetEmployeeException;
 
@@ -53,7 +54,7 @@ public class EmployeeController {
 
         try {
             return Response.ok().entity(employeeService.createNewEmployee(employeeRequest)).build();
-        } catch (EmployeeRequestIsNotValid e) {
+        } catch (DeliveryEmployeeCouldNotBeCreatedException | EmployeeRequestIsNotValid e) {
             System.err.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).build();
         } catch (SQLException e) {
