@@ -1,34 +1,47 @@
 package org.kainos.ea.cli;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class EmployeeRequest {
-    private String f_name;
-    private String l_name;
+    private String f_Name;
+    private String l_Name;
     private double salary;
-    private String bank_acc_num;
-    private String ni_num;
+    private String bank_Acc_Num;
+    private String niNum;
 
-    public EmployeeRequest(String f_name, String l_name, double salary, String bank_acc_num, String ni_num) {
-        this.f_name = f_name;
-        this.l_name = l_name;
+
+    @JsonCreator
+    public EmployeeRequest(
+         @JsonProperty("f_Name") String f_Name,
+         @JsonProperty("l_Name")String l_Name,
+         @JsonProperty("salary")double salary,
+         @JsonProperty("bank_acc_num") String bank_Acc_Num,
+         @JsonProperty("ni_num") String niNum)
+         {
+
+        this.f_Name = f_Name;
+        this.l_Name = l_Name;
         this.salary = salary;
-        this.bank_acc_num = bank_acc_num;
-        this.ni_num = ni_num;
+        this.bank_Acc_Num = bank_Acc_Num;
+        this.niNum = niNum;
+
     }
 
-    public String getF_name() {
-        return f_name;
+    public String getF_Name() {
+        return f_Name;
     }
 
-    public void setF_name(String f_name) {
-        this.f_name = f_name;
+    public void setF_Name(String f_Name) {
+        this.f_Name = f_Name;
     }
 
-    public String getL_name() {
-        return l_name;
+    public String getL_Name() {
+        return l_Name;
     }
 
-    public void setL_name(String l_name) {
-        this.l_name = l_name;
+    public void setL_Name(String l_Name) {
+        this.l_Name = l_Name;
     }
 
     public double getSalary() {
@@ -39,19 +52,23 @@ public class EmployeeRequest {
         this.salary = salary;
     }
 
-    public String getBank_acc_num() {
-        return bank_acc_num;
+    public String getBank_Acc_Num() {
+        return bank_Acc_Num;
     }
 
-    public void setBank_acc_num(String bank_acc_num) {
-        this.bank_acc_num = bank_acc_num;
+    public void setBank_Acc_Num(String bank_Acc_Num) {
+        this.bank_Acc_Num = bank_Acc_Num;
     }
 
-    public String getNi_num() {
-        return ni_num;
+
+
+    public String getNiNum() {
+        return niNum;
     }
 
-    public void setNi_num(String ni_num) {
-        this.ni_num = ni_num;
+
+
+    public void setNiNum(String niNum) {
+        this.niNum = niNum;
     }
 }
