@@ -40,57 +40,63 @@ public class EmployeeDao {
 
     public int createNewEmployee(EmployeeRequest employeeRequest) throws SQLException, DeliveryEmployeeCouldNotBeCreatedException {
 
-        Connection c = databaseConnector.getConnection();
+        try {
+            Connection c = databaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO employee (f_name, l_name, salary, bank_acc_num, ni_num) " +
-                "VALUES (?, ?, ?, ?, ?)";
+            String insertStatement = "INSERT INTO employee (f_name, l_name, salary, bank_acc_num, ni_num) " +
+                    "VALUES (?, ?, ?, ?, ?)";
 
-        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
-        st.setString(1, employeeRequest.getfName());
-        st.setString(2, employeeRequest.getlName());
-        st.setDouble(3, employeeRequest.getSalary());
-        st.setString(4, employeeRequest.getBank_acc_num());
-        st.setString(5, employeeRequest.getNi_num());
+            st.setString(1, employeeRequest.getfName());
+            st.setString(2, employeeRequest.getlName());
+            st.setDouble(3, employeeRequest.getSalary());
+            st.setString(4, employeeRequest.getBank_acc_num());
+            st.setString(5, employeeRequest.getNi_num());
 
-        st.executeUpdate();
+            st.executeUpdate();
 
-        ResultSet rs = st.getGeneratedKeys();
+            ResultSet rs = st.getGeneratedKeys();
 
-        if (rs.next()) {
 
-            System.out.println("Adding New Employee Delivery.");
+            if (rs.next()) {
 
-            // Add New Create ID To Employee_delivery Table
-            int newlyCreatedIDEmployeeTable = rs.getInt(1);
-            ResultSet rsEmployeeDelivery;
-            
-            insertStatement = "INSERT INTO delivery_employee (employee_id) " +
-                    "VALUES (?)";
+                System.out.println("Adding New Employee Delivery.");
 
-            st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+                // Add New Create ID To Employee_delivery Table
+                int newlyCreatedIDEmployeeTable = rs.getInt(1);
+                ResultSet rsEmployeeDelivery;
 
-            st.setInt(1, newlyCreatedIDEmployeeTable);
+                insertStatement = "INSERT INTO delivery_employee (employee_id) " +
+                        "VALUES (?)";
 
-            rsEmployeeDelivery = st.getGeneratedKeys();
+                st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
-            if (rsEmployeeDelivery != null) {
-                return newlyCreatedIDEmployeeTable;
-            }
+                st.setInt(1, newlyCreatedIDEmployeeTable);
 
-            // Failed to add employee to delivery_employee
-            System.err.println("Delivery Employee Could Not Be Added. Removing From Employee Table.");
+                rsEmployeeDelivery = st.getGeneratedKeys();
+
+                if (rsEmployeeDelivery != null) {
+                    return newlyCreatedIDEmployeeTable;
+                }
+
+                // Failed to add employee to delivery_employee
+                System.err.println("Delivery Employee Could Not Be Added. Removing From Employee Table.");
 
                 // Need to remove employee from table.
-            String deleteStatement = "DELETE FROM employee WHERE employee_id = ?";
-            st = c.prepareStatement(deleteStatement);
-            st.setInt(1, newlyCreatedIDEmployeeTable);
-            st.executeUpdate();
-            throw new DeliveryEmployeeCouldNotBeCreatedException();
-        }
+                String deleteStatement = "DELETE FROM employee WHERE employee_id = ?";
+                st = c.prepareStatement(deleteStatement);
+                st.setInt(1, newlyCreatedIDEmployeeTable);
+                st.executeUpdate();
+                throw new DeliveryEmployeeCouldNotBeCreatedException();
+            }
 
-        // Error - Could not add employee to table.
-        throw new DeliveryEmployeeCouldNotBeCreatedException();
+            // Error - Could not add employee to table.
+            throw new DeliveryEmployeeCouldNotBeCreatedException();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            throw new SQLException();
+        }
     }
 
 }
