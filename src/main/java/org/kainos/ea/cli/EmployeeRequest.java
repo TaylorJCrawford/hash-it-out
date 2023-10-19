@@ -3,6 +3,8 @@ package org.kainos.ea.cli;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.sql.Date;
+
 public class EmployeeRequest {
 
     private String fName;
@@ -10,17 +12,6 @@ public class EmployeeRequest {
     private double salary;
     private String bankAccNum;
     private String niNum;
-
-    public EmployeeRequest( String fName, String lName, double salary, String bankAccNum, String niNum) {
-
-        this.fName = fName;
-        this.lName = lName;
-        this.salary = salary;
-        this.bankAccNum = bankAccNum;
-        this.niNum = niNum;
-    }
-
-
 
     public String getfName() {
         return fName;
@@ -62,13 +53,15 @@ public class EmployeeRequest {
         this.niNum = niNum;
     }
 
+
+
     @JsonCreator
     public EmployeeRequest (
-            @JsonProperty("f_name") String fName,
-            @JsonProperty("l_name") String lName,
+            @JsonProperty("fName") String fName,
+            @JsonProperty("lName") String lName,
             @JsonProperty("salary") Double salary,
-            @JsonProperty("bank_acc_num") String bankAccNum,
-            @JsonProperty("ni_num") String niNum
+            @JsonProperty("bankAccNum") String bankAccNum,
+            @JsonProperty("niNum") String niNum
     )
     {
         this.fName=fName;

@@ -3,7 +3,6 @@ package org.kainos.ea.cli;
 public class Employee {
 
     private int employeeId;
-
     private String fName;
     private String lName;
     private double salary;
@@ -19,20 +18,20 @@ public class Employee {
         this.niNum = niNum;
     }
 
-    public int getEmployee_id() {
+    public int getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employeeId = employee_id;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public String getfName() {
+    public String getF_name() {
         return fName;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
+    public void setF_name(String f_name) {
+        this.fName = f_name;
     }
 
     public String getlName() {
