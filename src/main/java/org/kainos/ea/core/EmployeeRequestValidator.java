@@ -7,11 +7,11 @@ public class EmployeeRequestValidator {
 
     public String isEmployeeValid (EmployeeRequest employeeRequest) {
 
-        if (employeeRequest.getF_name().length() > 50) {
+        if (employeeRequest.getfName().length() > 50) {
             return "Name is greater than 50 Chars.";
         }
 
-        if (employeeRequest.getL_name().length() > 50) {
+        if (employeeRequest.getlName().length() > 50) {
             return "Name is greater than 50 Chars.";
         }
 

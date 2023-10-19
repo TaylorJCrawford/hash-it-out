@@ -3,16 +3,16 @@ package org.kainos.ea.cli;
 public class Employee {
 
     private int employee_id;
-    private String f_name;
-    private String l_name;
+    private String fName;
+    private String lName;
     private double salary;
     private String bank_acc_num;
     private String ni_num;
 
-    public Employee(int employee_id, String f_name, String l_name, double salary, String bank_acc_num, String ni_num) {
+    public Employee(int employee_id, String fname, String lname, double salary, String bank_acc_num, String ni_num) {
         this.employee_id = employee_id;
-        this.f_name = f_name;
-        this.l_name = l_name;
+        this.fName = fname;
+        this.lName = lname;
         this.salary = salary;
         this.bank_acc_num = bank_acc_num;
         this.ni_num = ni_num;
@@ -26,20 +26,20 @@ public class Employee {
         this.employee_id = employee_id;
     }
 
-    public String getF_name() {
-        return f_name;
+    public String getfName() {
+        return fName;
     }
 
-    public void setF_name(String f_name) {
-        this.f_name = f_name;
+    public void setfName(String fName) {
+        this.fName = fName;
     }
 
-    public String getL_name() {
-        return l_name;
+    public String getlName() {
+        return lName;
     }
 
-    public void setL_name(String l_name) {
-        this.l_name = l_name;
+    public void setlName(String lName) {
+        this.lName = lName;
     }
 
     public double getSalary() {

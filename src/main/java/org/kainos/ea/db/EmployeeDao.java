@@ -47,8 +47,8 @@ public class EmployeeDao {
 
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
-        st.setString(1, employeeRequest.getF_name());
-        st.setString(2, employeeRequest.getL_name());
+        st.setString(1, employeeRequest.getfName());
+        st.setString(2, employeeRequest.getlName());
         st.setDouble(3, employeeRequest.getSalary());
         st.setString(4, employeeRequest.getBank_acc_num());
         st.setString(5, employeeRequest.getNi_num());
@@ -63,7 +63,7 @@ public class EmployeeDao {
 
             // Add New Create ID To Employee_delivery Table
             int newlyCreatedIDEmployeeTable = rs.getInt(1);
-            rs = null;
+            ResultSet rsEmployeeDelivery;
             
             insertStatement = "INSERT INTO delivery_employee (employee_id) " +
                     "VALUES (?)";
@@ -72,9 +72,9 @@ public class EmployeeDao {
 
             st.setInt(1, newlyCreatedIDEmployeeTable);
 
-            rs = st.getGeneratedKeys();
+            rsEmployeeDelivery = st.getGeneratedKeys();
 
-            if (rs != null) {
+            if (rsEmployeeDelivery != null) {
                 return newlyCreatedIDEmployeeTable;
             }
 
