@@ -3,7 +3,6 @@ package org.kainos.ea.db;
 import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
 import org.kainos.ea.client.DeliveryEmployeeCouldNotBeCreatedException;
-import org.kainos.ea.cli.EmployeeRequest;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ public class EmployeeDao {
     public List<Employee> getAllEmployees() throws SQLException {
 
         Connection c = databaseConnector.getConnection();
+
 
         Statement st = c.createStatement();
 
@@ -37,6 +37,40 @@ public class EmployeeDao {
         }
 
         return employeeList;
+    }
+
+// Add validator to get all employees, loop through array to check if employee is in db
+    public Employee getEmployeeByID(int id) throws SQLException{
+        Connection c = databaseConnector.getConnection();
+
+
+        String insertStatement = ("SELECT employee_id, f_name, l_name, salary, bank_acc_num, ni_num" +
+                " FROM employee WHERE employee_id=?");
+
+        PreparedStatement st = c.prepareStatement(insertStatement);
+
+                    st.setInt(1, id);
+
+        st.executeQuery();
+
+        ResultSet rs = st.getGeneratedKeys();
+
+        if (rs.next()){
+            Employee employee = new Employee(
+                    rs.getInt("employee_id"),
+                    rs.getString("f_name"),
+                    rs.getString("l_name"),
+                    rs.getDouble("salary"),
+                    rs.getString("bank_acc_num"),
+                    rs.getString("ni_num")
+
+
+
+            );
+            return employee;
+        }
+
+        return null;
     }
 
     /*Query the database using given ID to view name, salary, bank account number and national insurance number of
@@ -71,15 +105,11 @@ public class EmployeeDao {
 
 
             );
-            System.out.println(employeeRequest.getfName());
             return employeeRequest;
         }
 
         return null;
     }
-
-
-
 
     public int createNewEmployee(EmployeeRequest employeeRequest) throws SQLException, DeliveryEmployeeCouldNotBeCreatedException {
 
@@ -157,11 +187,27 @@ public class EmployeeDao {
                     rs.getString("bank_acc_num"),
                     rs.getString("ni_num")
             );
-
             deliveryEmployeeList.add(employee);
         }
-
         return deliveryEmployeeList;
     }
 
+
+    public void updateEmployee(int id, EmployeeRequest employee) throws SQLException{
+
+   Connection c = databaseConnector.getConnection();
+
+   String updateStatement = "UPDATE employee SET f_name = ?, l_name = ?, salary = ?, bank_acc_num =? RIGHT JOIN delivery_employee on employee.employee_id = delivery_employee.employee_id WHERE employee_id = ? ";
+
+        PreparedStatement st = c.prepareStatement(updateStatement);
+
+        st.setString(1, employee.getfName());
+        st.setString(2, employee.getlName());
+        st.setDouble(3, employee.getSalary());
+        st.setString(4, employee.getBankAccNum());
+        st.setInt(5, id);
+
+        st.executeUpdate();
+
+    }
 }

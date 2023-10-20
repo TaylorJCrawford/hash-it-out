@@ -1,7 +1,8 @@
 package org.kainos.ea.cli;
 
-public class Employee {
 
+
+public class Employee {
     private int employeeId;
     private String fName;
     private String lName;
@@ -24,14 +25,6 @@ public class Employee {
 
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
-    }
-
-    public String getF_name() {
-        return fName;
-    }
-
-    public void setF_name(String f_name) {
-        this.fName = f_name;
     }
 
     public String getlName() {

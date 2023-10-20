@@ -3,8 +3,6 @@ package org.kainos.ea.cli;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.sql.Date;
-
 public class EmployeeRequest {
 
     private String fName;
@@ -52,8 +50,6 @@ public class EmployeeRequest {
     public void setNiNum(String niNum) {
         this.niNum = niNum;
     }
-
-
 
     @JsonCreator
     public EmployeeRequest (
