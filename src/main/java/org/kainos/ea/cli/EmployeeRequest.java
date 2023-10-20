@@ -4,44 +4,27 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EmployeeRequest {
-    private String f_Name;
-    private String l_Name;
+
+    private String fName;
+    private String lName;
     private double salary;
-    private String bank_Acc_Num;
+    private String bankAccNum;
     private String niNum;
 
-
-    @JsonCreator
-    public EmployeeRequest(
-         @JsonProperty("f_Name") String f_Name,
-         @JsonProperty("l_Name")String l_Name,
-         @JsonProperty("salary")double salary,
-         @JsonProperty("bank_acc_num") String bank_Acc_Num,
-         @JsonProperty("ni_num") String niNum)
-         {
-
-        this.f_Name = f_Name;
-        this.l_Name = l_Name;
-        this.salary = salary;
-        this.bank_Acc_Num = bank_Acc_Num;
-        this.niNum = niNum;
-
+    public String getfName() {
+        return fName;
     }
 
-    public String getF_Name() {
-        return f_Name;
+    public void setfName(String fName) {
+        this.fName = fName;
     }
 
-    public void setF_Name(String f_Name) {
-        this.f_Name = f_Name;
+    public String getlName() {
+        return lName;
     }
 
-    public String getL_Name() {
-        return l_Name;
-    }
-
-    public void setL_Name(String l_Name) {
-        this.l_Name = l_Name;
+    public void setlName(String lName) {
+        this.lName = lName;
     }
 
     public double getSalary() {
@@ -52,23 +35,35 @@ public class EmployeeRequest {
         this.salary = salary;
     }
 
-    public String getBank_Acc_Num() {
-        return bank_Acc_Num;
+    public String getBankAccNum() {
+        return bankAccNum;
     }
 
-    public void setBank_Acc_Num(String bank_Acc_Num) {
-        this.bank_Acc_Num = bank_Acc_Num;
+    public void setBankAccNum(String bankAccNum) {
+        this.bankAccNum = bankAccNum;
     }
-
-
 
     public String getNiNum() {
         return niNum;
     }
 
-
-
     public void setNiNum(String niNum) {
         this.niNum = niNum;
+    }
+
+    @JsonCreator
+    public EmployeeRequest (
+            @JsonProperty("fName") String fName,
+            @JsonProperty("lName") String lName,
+            @JsonProperty("salary") Double salary,
+            @JsonProperty("bankAccNum") String bankAccNum,
+            @JsonProperty("niNum") String niNum
+    )
+    {
+        this.fName=fName;
+        this.lName=lName;
+        this.salary=salary;
+        this.bankAccNum=bankAccNum;
+        this.niNum=niNum;
     }
 }

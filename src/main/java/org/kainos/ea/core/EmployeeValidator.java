@@ -9,19 +9,16 @@ import java.sql.SQLException;
 public class EmployeeValidator {
 
 
-    public String isValidEmployee(EmployeeRequest idToCheck) throws SQLException {
+    public String isValidEmployee(int id) throws SQLException {
+        EmployeeDao employeeDao = new EmployeeDao();
 
-        try {
-            EmployeeDao employeeDao = new EmployeeDao();
+        Employee employee = employeeDao.getEmployeeByID(id);
 
-            Employee employee = employeeDao.getEmployeeByID(idToCheck);
-
-            return employee != null;
-
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
+        if (employee == null) {
+            return "EmployeeID invalid";
         }
-        return isValidEmployee(idToCheck);
+
+        return null;
     }
 
 }
